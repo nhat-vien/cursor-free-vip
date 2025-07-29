@@ -2,7 +2,7 @@ import os
 import sys
 import configparser
 from colorama import Fore, Style
-from utils import get_user_documents_path, get_linux_cursor_path, get_default_driver_path, get_default_browser_path
+from utils import get_user_documents_path, get_linux_cursor_path, get_default_driver_path, get_default_browser_path, get_program_files_dirs
 import shutil
 import datetime
 
@@ -118,11 +118,13 @@ def setup_config(translator=None):
         if sys.platform == "win32":
             appdata = os.getenv("APPDATA")
             localappdata = os.getenv("LOCALAPPDATA", "")
+            programfiles = get_program_files_dirs()
             default_config['WindowsPaths'] = {
                 'storage_path': os.path.join(appdata, "Cursor", "User", "globalStorage", "storage.json"),
                 'sqlite_path': os.path.join(appdata, "Cursor", "User", "globalStorage", "state.vscdb"),
                 'machine_id_path': os.path.join(appdata, "Cursor", "machineId"),
-                'cursor_path': os.path.join(localappdata, "Programs", "Cursor", "resources", "app"),
+                'cursor_path': os.path.join(programfiles, "Cursor", "resources", "app"),
+                # 'cursor_path': os.path.join(localappdata, "Programs", "Cursor", "resources", "app"),
                 'updater_path': os.path.join(localappdata, "cursor-updater"),
                 'update_yml_path': os.path.join(localappdata, "Programs", "Cursor", "resources", "app-update.yml"),
                 'product_json_path': os.path.join(localappdata, "Programs", "Cursor", "resources", "app", "product.json")
