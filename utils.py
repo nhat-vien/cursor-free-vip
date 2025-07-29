@@ -3,6 +3,14 @@ import sys
 import platform
 import random
 
+import os
+
+def get_program_files_dirs():
+    pf = os.environ.get('ProgramFiles')         # C:\Program Files
+    # pf_x86 = os.environ.get('ProgramFiles(x86)')  # C:\Program Files (x86), only Windows 64-bit
+    return pf#, pf_x86
+
+
 def get_user_documents_path():
     """Get user documents path"""
     if platform.system() == "Windows":
